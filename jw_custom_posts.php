@@ -34,8 +34,8 @@ class JW_Post_Type
         if (!isset($_SESSION["taxonomy_data"])) {
             $_SESSION['taxonomy_data'] = array();
         }
-
-
+   
+        
         $this->post_type_name = strtolower($name);
         $this->post_type_args = (array)$post_type_args;
 
@@ -217,7 +217,6 @@ class JW_Post_Type
                             $lookup = array(
                                 "text" => "<input type='text' name='$id_name' value='$value' class='widefat' />",
                                 "textarea" => "<textarea name='$id_name' class='widefat' rows='10'>$value</textarea>",
-                                "editor" => 1,
                                 "checkbox" => "<input type='checkbox' name='$id_name' value='$name' $checked />",
                                 "select" => isset($select) ? $select : '',
                                 "file" => "<input type='file' name='$id_name' id='$id_name' />"
@@ -226,13 +225,9 @@ class JW_Post_Type
 
                             <p>
                                 <label><?php echo ucwords($name) . ':'; ?></label>
-                                <?php if ( $lookup[$type] == 1 ) :
-                                    wp_editor( $value, $id_name, array( 'media_buttons' => false ) );
-                                else :
-                                    echo $lookup[is_array($type) ? $type[0] : $type];
-                                endif; ?>
+                                <?php echo $lookup[is_array($type) ? $type[0] : $type]; ?>
                             </p>
-
+                           
                             <p>
 
                                 <?php
