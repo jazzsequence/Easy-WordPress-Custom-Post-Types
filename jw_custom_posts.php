@@ -144,7 +144,7 @@ class JW_Post_Type
      * @param string $title
      * @param array $form_fields Associated array that contains the label of the input, and the desired input type. 'Title' => 'text'
      */
-    function add_meta_box($title, $form_fields = array())
+    function add_meta_box($title, $form_fields = array(), $context = 'normal')
     {
         $post_type_name = $this->post_type_name;
 
@@ -156,7 +156,7 @@ class JW_Post_Type
 
 
         // At WordPress' admin_init action, add any applicable metaboxes.
-        $this->admin_init(function() use($title, $form_fields, $post_type_name)
+        $this->admin_init(function() use($title, $form_fields, $context, $post_type_name)
             {
                 add_meta_box(
                     strtolower(str_replace(' ', '_', $title)), // id
@@ -260,7 +260,7 @@ class JW_Post_Type
                         }
                     },
                     $post_type_name, // associated post type
-                    'normal', // location/context. normal, side, etc.
+                    $context, // location/context. normal, side, etc.
                     'default', // priority level
                     array($form_fields) // optional passed arguments.
                 ); // end add_meta_box
